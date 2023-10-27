@@ -17,8 +17,8 @@ typedef struct Motor{
   int in2;
   int en;
 };
-Motor right={8,7,9};
-Motor left={5,4,3};
+Motor right={PIN_6,PIN_2,PIN_10};
+Motor left={PIN_5,PIN_3,PIN_11};
 void MotorSetup(Motor motor){
   pinMode(motor.en, OUTPUT);
   pinMode(motor.in1, OUTPUT);
@@ -33,7 +33,7 @@ void setup() {
   MotorSetup(left);
 }
 
-void Turn(bool direction){
+void Forward(bool direction){
   analogWrite(right.en, 255);
 	analogWrite(left.en, 255);
   	if(direction){
@@ -49,24 +49,20 @@ void Turn(bool direction){
   }
 }
 
-void forward(bool direction){
+void Turn(bool direction){
   analogWrite(right.en, 255);
 	analogWrite(left.en, 255);
-
   	if(direction){
     digitalWrite(right.in1, LOW);
     digitalWrite(right.in2, HIGH);
     digitalWrite(left.in1, LOW);
     digitalWrite(left.in2, HIGH);
-
   }else{	
     digitalWrite(right.in1, HIGH);
 	  digitalWrite(right.in2, LOW);
 	  digitalWrite(left.in1, HIGH);
     digitalWrite(left.in2, LOW);
-
   }
-
 }
 
 void stop(){
@@ -154,7 +150,12 @@ void speedControl(bool direction) {
 }
 
 void loop() {
-  forward(true);
+  // forward(false);
+  // Turn(true);
+  delay(10000);
+  stop();
+  delay(1000);
+
 
 
 }
